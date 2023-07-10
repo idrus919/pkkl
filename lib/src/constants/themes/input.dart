@@ -39,6 +39,8 @@ InputDecorationTheme get inputDecorationTheme {
       color: neutralColor,
       fontFamily: 'Poppins',
     ),
+    filled: true,
+    fillColor: neutral1Color,
     contentPadding: insetSymmetric(24, 20),
     disabledBorder: OutlineInputBorder(
       borderSide: const BorderSide(color: neutral5Color, width: 1),

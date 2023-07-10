@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pkkl/src/constants/assets/images.dart';
+import 'package:pkkl/src/constants/route.dart';
 import 'package:pkkl/src/constants/themes/colors.dart';
 import 'package:pkkl/src/constants/themes/dimens.dart';
 import 'package:pkkl/src/constants/themes/input.dart';
@@ -97,7 +98,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 TextFormField(
                   style: Get.textTheme.bodyText2?.copyWith(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                   decoration: inputDecoration.copyWith(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -108,7 +109,7 @@ class LoginPage extends StatelessWidget {
                 height(),
                 TextFormField(
                   style: Get.textTheme.bodyText2?.copyWith(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                   decoration: inputDecoration.copyWith(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -118,7 +119,9 @@ class LoginPage extends StatelessWidget {
                 ),
                 height(),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offAllNamed(mainRoute);
+                  },
                   child: const Center(child: Text('Login')),
                 ),
               ],

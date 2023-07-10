@@ -14,6 +14,8 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  intl: ^0.17.0
+  month_picker_dialog: ^0.4.0
 
 dev_dependencies:
   flutter_test:

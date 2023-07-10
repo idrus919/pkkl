@@ -24,7 +24,7 @@ AppBarTheme appBarTheme = AppBarTheme(
   iconTheme: const IconThemeData(color: neutral7Color),
   elevation: 0,
   toolbarHeight: 78,
-  centerTitle: true,
+  centerTitle: false,
   titleTextStyle: Get.textTheme.bodyText2?.copyWith(
     color: neutralColor,
     fontWeight: FontWeight.w600,
@@ -65,7 +65,7 @@ TextTheme textTheme = const TextTheme(
     fontFamily: 'Poppins',
   ),
   caption: TextStyle(
-    color: neutral5Color,
+    color: neutral6Color,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.01,

@@ -14,7 +14,7 @@ ButtonStyle get elevatedButtonStyle {
     ),
     elevation: 0,
     shadowColor: Colors.transparent,
-    textStyle: Get.textTheme.bodyText2?.copyWith(
+    textStyle: Get.textTheme.bodyText1?.copyWith(
       fontWeight: FontWeight.w600,
       color: neutral1Color,
       fontFamily: 'Poppins',
@@ -32,7 +32,7 @@ ButtonStyle get outlinedButtonStyle {
     ),
     elevation: 0,
     shadowColor: Colors.transparent,
-    textStyle: Get.textTheme.bodyText2?.copyWith(
+    textStyle: Get.textTheme.bodyText1?.copyWith(
       fontWeight: FontWeight.w600,
       color: neutral3Color,
       fontFamily: 'Poppins',
@@ -48,7 +48,7 @@ ButtonStyle get textButtonStyle {
     shape: RoundedRectangleBorder(
       borderRadius: borderRadius(50),
     ),
-    textStyle: Get.textTheme.bodyText2?.copyWith(
+    textStyle: Get.textTheme.bodyText1?.copyWith(
       fontWeight: FontWeight.w600,
       color: neutral3Color,
       fontFamily: 'Poppins',
