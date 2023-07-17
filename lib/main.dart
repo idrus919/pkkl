@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pkkl/src/constants/route.dart';
 import 'package:pkkl/src/constants/themes/index.dart';
+import 'package:pkkl/src/services/index.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
       title: 'PKKL Helvetia',
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      initialRoute: loginRoute,
+      initialRoute: mainRoute,
+      initialBinding: BindingsBuilder(
+        () => Get.put<AppService>(AppService(), permanent: true),
+      ),
       getPages: routes,
       builder: (context, child) {
         return MediaQuery(

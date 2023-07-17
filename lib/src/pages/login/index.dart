@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
                     height(),
                     Text(
                       'Penilaian Kinerja Kepala Lingkungan',
-                      style: Get.textTheme.bodyText1?.copyWith(
+                      style: Get.textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
                       ),
@@ -97,7 +97,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
-                  style: Get.textTheme.bodyText2?.copyWith(
+                  style: Get.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: inputDecoration.copyWith(
@@ -108,7 +108,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 height(),
                 TextFormField(
-                  style: Get.textTheme.bodyText2?.copyWith(
+                  style: Get.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: inputDecoration.copyWith(

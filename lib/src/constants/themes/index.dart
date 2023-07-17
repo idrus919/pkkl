@@ -15,65 +15,61 @@ final themeData = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
   outlinedButtonTheme: OutlinedButtonThemeData(style: outlinedButtonStyle),
   textButtonTheme: TextButtonThemeData(style: textButtonStyle),
-  backgroundColor: backgroundColor,
 );
 
 AppBarTheme appBarTheme = AppBarTheme(
   color: neutral1Color,
   systemOverlayStyle: uiLight,
-  iconTheme: const IconThemeData(color: neutral7Color),
+  iconTheme: const IconThemeData(color: neutralColor),
   elevation: 0,
   toolbarHeight: 78,
-  centerTitle: false,
-  titleTextStyle: Get.textTheme.bodyText2?.copyWith(
+  centerTitle: true,
+  titleTextStyle: Get.textTheme.titleLarge?.copyWith(
     color: neutralColor,
     fontWeight: FontWeight.w600,
+    fontFamily: 'Poppins',
   ),
 );
 
 TextTheme textTheme = const TextTheme(
-  headline6: TextStyle(
+  titleLarge: TextStyle(
     color: neutralColor,
     fontSize: 22,
+    fontWeight: FontWeight.w600,
     letterSpacing: -0.01,
     fontFamily: 'Poppins',
   ),
-  subtitle1: TextStyle(
+  titleMedium: TextStyle(
     color: neutralColor,
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
     letterSpacing: -0.01,
     fontFamily: 'Poppins',
   ),
-  subtitle2: TextStyle(
+  titleSmall: TextStyle(
     color: neutralColor,
-    fontSize: 18,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
     letterSpacing: -0.01,
     fontFamily: 'Poppins',
   ),
-  bodyText1: TextStyle(
+  bodyLarge: TextStyle(
     color: neutralColor,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.01,
     fontFamily: 'Poppins',
   ),
-  bodyText2: TextStyle(
+  bodyMedium: TextStyle(
     color: neutralColor,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.01,
     fontFamily: 'Poppins',
   ),
-  caption: TextStyle(
+  bodySmall: TextStyle(
     color: neutral6Color,
     fontSize: 12,
-    fontWeight: FontWeight.w400,
-    letterSpacing: -0.01,
-    fontFamily: 'Poppins',
-  ),
-  overline: TextStyle(
-    color: neutralColor,
-    fontSize: 10,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.01,
     fontFamily: 'Poppins',

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:pkkl/src/models/index.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+final value1 = Model(id: 1, name: 'Sangat Buruk');
+final value2 = Model(id: 2, name: 'Buruk');
+final value3 = Model(id: 3, name: 'Cukup');
+final value4 = Model(id: 4, name: 'Baik');
+final value5 = Model(id: 5, name: 'Sangat Baik');
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
+final scores = [value1, value2, value3, value4, value5];

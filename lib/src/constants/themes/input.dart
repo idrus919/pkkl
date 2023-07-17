@@ -6,34 +6,34 @@ import 'package:get/get.dart';
 InputDecorationTheme get inputDecorationTheme {
   return InputDecorationTheme(
     isDense: true,
-    helperStyle: Get.textTheme.bodyText2?.copyWith(
+    helperStyle: Get.textTheme.bodyMedium?.copyWith(
       fontSize: 12,
       color: neutral6Color,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w500,
     ),
-    hintStyle: Get.textTheme.bodyText2?.copyWith(
+    hintStyle: Get.textTheme.bodyMedium?.copyWith(
       fontSize: 14,
       color: neutral6Color,
       height: 1,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w500,
     ),
-    labelStyle: Get.textTheme.bodyText2?.copyWith(
+    labelStyle: Get.textTheme.bodyMedium?.copyWith(
       fontSize: 14,
       color: neutral8Color,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w500,
       height: 1,
     ),
-    errorStyle: Get.textTheme.bodyText2?.copyWith(
+    errorStyle: Get.textTheme.bodyMedium?.copyWith(
       fontSize: 12,
       color: redColor,
       height: 1,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w500,
     ),
-    floatingLabelStyle: Get.textTheme.bodyText2?.copyWith(
+    floatingLabelStyle: Get.textTheme.bodyMedium?.copyWith(
       fontWeight: FontWeight.w700,
       fontSize: 16,
       color: neutralColor,
