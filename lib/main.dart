@@ -4,8 +4,10 @@ import 'package:pkkl/src/constants/route.dart';
 import 'package:pkkl/src/constants/themes/index.dart';
 import 'package:pkkl/src/services/index.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put<AppService>(AppService(), permanent: true);
+  await Future.delayed(const Duration(seconds: 1));
 
   runApp(const MyApp());
 }
@@ -20,9 +22,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeData,
       initialRoute: mainRoute,
-      initialBinding: BindingsBuilder(
-        () => Get.put<AppService>(AppService(), permanent: true),
-      ),
       getPages: routes,
       builder: (context, child) {
         return MediaQuery(

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pkkl/src/middleware.dart';
 import 'package:pkkl/src/pages/index.dart';
 import 'package:pkkl/src/pages/controller.dart';
+import 'package:pkkl/src/pages/login/controller.dart';
 import 'package:pkkl/src/pages/login/index.dart';
 import 'package:pkkl/src/pages/rank/controller.dart';
 import 'package:pkkl/src/pages/rank/index.dart';
@@ -44,5 +45,8 @@ final routes = [
   GetPage(
     name: login,
     page: () => const LoginPage(),
+    binding: BindingsBuilder(
+      () => Get.put<LoginController>(LoginController()),
+    ),
   ),
 ];

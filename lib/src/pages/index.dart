@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pkkl/src/constants/assets/images.dart';
-import 'package:pkkl/src/constants/route.dart';
 import 'package:pkkl/src/constants/themes/colors.dart';
 import 'package:pkkl/src/constants/themes/dimens.dart';
+import 'package:pkkl/src/models/user.dart';
 import 'package:pkkl/src/pages/controller.dart';
 import 'package:pkkl/src/utils/date.dart';
+import 'package:pkkl/src/widgets/row.dart';
+import 'package:pkkl/src/widgets/scroll.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -49,9 +51,7 @@ class MainPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Get.offAllNamed(loginRoute);
-            },
+            onPressed: controller.logout,
             icon: const Icon(
               Icons.logout_outlined,
               color: redColor,
@@ -62,101 +62,42 @@ class MainPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: inset(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Selamat datang di',
-                          style: Get.textTheme.bodySmall?.copyWith(
-                            color: neutral8Color,
-                          ),
-                        ),
-                        Text(
-                          'Aplikasi Penilaian Kinerja Kepala Lingkungan',
-                          style: Get.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    margin: insetHorizontal(),
-                    padding: inset(),
-                    decoration: BoxDecoration(
-                      color: thirdColor,
-                      borderRadius: borderRadius(),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Obx(() {
+              final loading = controller.loading.value;
+              final user = controller.user.value;
+
+              return ScrollWidget(
+                onRefresh: controller.me,
+                loading: loading,
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: inset(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '123456',
+                              'Selamat datang di',
+                              style: Get.textTheme.bodySmall?.copyWith(
+                                color: neutral8Color,
+                              ),
+                            ),
+                            Text(
+                              'Aplikasi Penilaian Kinerja Kepala Lingkungan',
                               style: Get.textTheme.bodyLarge?.copyWith(
-                                color: neutral1Color,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            const Icon(
-                              Icons.account_box_outlined,
-                              color: neutral2Color,
-                            ),
                           ],
                         ),
-                        const Divider(color: neutral5Color),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Nama',
-                              style: Get.textTheme.bodyMedium?.copyWith(
-                                color: neutral2Color,
-                              ),
-                            ),
-                            Text(
-                              'Muhammad Idrus',
-                              style: Get.textTheme.bodyMedium?.copyWith(
-                                color: neutral1Color,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        height(4),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Kelurahan',
-                              style: Get.textTheme.bodyMedium?.copyWith(
-                                color: neutral2Color,
-                              ),
-                            ),
-                            Text(
-                              'Medan Helvetia',
-                              style: Get.textTheme.bodyMedium?.copyWith(
-                                color: neutral1Color,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                    SliverToBoxAdapter(child: _buildUser(user)),
+                  ],
                 ),
-              ],
-            ),
+              );
+            }),
           ),
           Obx(() {
             final month = DateUtil.month(controller.month.value);
@@ -180,6 +121,55 @@ class MainPage extends StatelessWidget {
               ),
             );
           }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUser(UserModel? user) {
+    return Container(
+      margin: insetHorizontal(),
+      padding: inset(),
+      decoration: BoxDecoration(
+        color: thirdColor,
+        borderRadius: borderRadius(),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                user?.name ?? '',
+                style: Get.textTheme.bodyLarge?.copyWith(
+                  color: neutral1Color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Icon(
+                Icons.account_box_outlined,
+                color: neutral2Color,
+              ),
+            ],
+          ),
+          const Divider(color: neutral5Color),
+          RowWidget(
+            title: 'NIP',
+            value: user?.nip,
+          ),
+          RowWidget(
+            title: 'NIK',
+            value: user?.nik,
+          ),
+          RowWidget(
+            title: 'Kelurahan',
+            value: user?.urbanVillage?.name,
+          ),
+          RowWidget(
+            title: 'Lingkungan',
+            value: user?.environment,
+          ),
         ],
       ),
     );

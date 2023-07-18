@@ -6,7 +6,7 @@ import 'package:pkkl/src/utils/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
-  static Future<void> setToken(String? token) async {
+  static Future setToken(String? token) async {
     token = 'Bearer $token';
     final encrypted = Encrypt.encrypted(token);
     final prefs = await SharedPreferences.getInstance();
@@ -20,9 +20,14 @@ class Utils {
     return token;
   }
 
-  static Future<void> removeToken() async {
+  static Future removeToken() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
+  }
+
+  static bool isList(dynamic data) {
+    if (data == null) return false;
+    return (data as List?) != null && (data as List).isNotEmpty;
   }
 
   static void snackbar(String? message) {

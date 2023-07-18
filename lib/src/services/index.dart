@@ -9,12 +9,12 @@ class AppService extends GetxService {
   @override
   void onInit() {
     ever(logged, checkLogged);
+    checkLogged();
     super.onInit();
   }
 
   Future checkLogged([bool? value]) async {
     final token = await Utils.getToken();
     logged.value = token != null;
-    logged.refresh();
   }
 }

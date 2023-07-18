@@ -1,22 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pkkl/src/utils/dio/index.dart';
-import 'package:pkkl/src/utils/indext.dart';
 
 class Api {
+  static DioClient dio = DioClient();
+
   static Future get(
     String url, {
-    String? accessToken,
     required Function(dynamic value) onSuccess,
     required Function(String error) onError,
   }) async {
     try {
-      final token = await Utils.getToken();
-      final dio = DioClient(accessToken: accessToken ?? token);
-
-      debugPrint(token);
+      final request = await dio.request;
       debugPrint(url);
 
-      final response = await dio.request.get(url);
+      final response = await request.get(url);
 
       if (response.statusCode != 200) {
         throw response.statusMessage ?? 'Error';
@@ -33,19 +30,15 @@ class Api {
   static Future put(
     String url, {
     String? body,
-    String? accessToken,
     required Function(dynamic value) onSuccess,
     required Function(String error) onError,
   }) async {
     try {
-      final token = await Utils.getToken();
-      final dio = DioClient(accessToken: accessToken ?? token);
-
-      debugPrint(token);
+      final request = await dio.request;
       debugPrint(url);
       debugPrint(body);
 
-      final response = await dio.request.put(url, data: body);
+      final response = await request.put(url, data: body);
 
       if (response.statusCode != 200) {
         throw response.statusMessage ?? 'Error';
@@ -62,20 +55,16 @@ class Api {
   static Future post(
     String url, {
     String? body,
-    String? accessToken,
     required Function(dynamic value) onSuccess,
     required Function(String error) onError,
   }) async {
     try {
-      final token = await Utils.getToken();
-      final dio = DioClient(accessToken: accessToken ?? token);
+      final request = await dio.request;
 
-      debugPrint(accessToken);
-      debugPrint(token);
       debugPrint(url);
       debugPrint(body);
 
-      final response = await dio.request.post(url, data: body);
+      final response = await request.post(url, data: body);
 
       if (response.statusCode != 200) {
         throw response.statusMessage ?? 'Error';
@@ -92,19 +81,16 @@ class Api {
   static Future delete(
     String url, {
     String? body,
-    String? accessToken,
     required Function(dynamic value) onSuccess,
     required Function(String error) onError,
   }) async {
     try {
-      final token = await Utils.getToken();
-      final dio = DioClient(accessToken: accessToken ?? token);
+      final request = await dio.request;
 
-      debugPrint(token);
       debugPrint(url);
       debugPrint(body);
 
-      final response = await dio.request.delete(url);
+      final response = await request.delete(url);
 
       if (response.statusCode != 200) {
         throw response.statusMessage ?? 'Error';
@@ -121,19 +107,16 @@ class Api {
   static Future patch(
     String url, {
     String? body,
-    String? accessToken,
     required Function(dynamic value) onSuccess,
     required Function(String error) onError,
   }) async {
     try {
-      final token = await Utils.getToken();
-      final dio = DioClient(accessToken: accessToken ?? token);
+      final request = await dio.request;
 
-      debugPrint(token);
       debugPrint(url);
       debugPrint(body);
 
-      final response = await dio.request.patch(url, data: body);
+      final response = await request.patch(url, data: body);
 
       if (response.statusCode != 200) {
         throw response.statusMessage ?? 'Error';
