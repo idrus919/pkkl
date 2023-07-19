@@ -1,12 +1,14 @@
 import 'package:pkkl/src/models/index.dart';
+import 'package:pkkl/src/models/question.dart';
 import 'package:pkkl/src/models/user.dart';
 
 class EvolutionInput {
   DateTime? month;
   Model? urbanVillage;
   UserModel? user;
+  List<QuestionModel?>? questions;
 
-  EvolutionInput({this.month, this.urbanVillage, this.user});
+  EvolutionInput({this.month, this.urbanVillage, this.user, this.questions});
 
   bool get enableUser {
     final month = this.month != null;
@@ -14,6 +16,12 @@ class EvolutionInput {
     final user = this.user != null;
 
     return month && urbanVillage && user;
+  }
+
+  bool get enableEvaluation {
+    final questions = this.questions ?? [];
+    final empty = questions.any((e) => e?.answer == null);
+    return enableUser && questions.isNotEmpty && !empty;
   }
 
   String get paramUser {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pkkl/src/models/auth.dart';
+import 'package:pkkl/src/models/question.dart';
 import 'package:pkkl/src/models/user.dart';
 import 'package:pkkl/src/pages/input.dart';
 import 'package:pkkl/src/pages/login/input.dart';
@@ -82,6 +83,30 @@ class Repository {
         if (Utils.isList(json['data'])) {
           final data = json['data'] as List;
           result = data.map((f) => UserModel.fromJson(f)).toList();
+        }
+
+        onSuccess(result);
+      },
+      onError: (error) {
+        Utils.snackbar(error);
+        debugPrint(error);
+      },
+    );
+  }
+
+  static Future questions(
+    EvolutionInput? input, {
+    required Function(List<QuestionModel?> values) onSuccess,
+  }) async {
+    const url = 'v1/master/questions';
+
+    await Api.get(
+      url,
+      onSuccess: (json) {
+        List<QuestionModel?> result = [];
+        if (Utils.isList(json['data'])) {
+          final data = json['data'] as List;
+          result = data.map((f) => QuestionModel.fromJson(f)).toList();
         }
 
         onSuccess(result);

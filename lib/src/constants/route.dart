@@ -4,8 +4,8 @@ import 'package:pkkl/src/pages/index.dart';
 import 'package:pkkl/src/pages/controller.dart';
 import 'package:pkkl/src/pages/login/controller.dart';
 import 'package:pkkl/src/pages/login/index.dart';
-import 'package:pkkl/src/pages/rank/controller.dart';
-import 'package:pkkl/src/pages/rank/index.dart';
+import 'package:pkkl/src/pages/evaluation/controller.dart';
+import 'package:pkkl/src/pages/evaluation/index.dart';
 import 'package:pkkl/src/pages/user/controller.dart';
 import 'package:pkkl/src/pages/user/index.dart';
 
@@ -35,9 +35,9 @@ final routes = [
       ),
       GetPage(
         name: rank,
-        page: () => const RankPage(),
+        page: () => const EvaluationPage(),
         binding: BindingsBuilder(
-          () => Get.put<RankController>(RankController()),
+          () => Get.put<EvaluationController>(EvaluationController()),
         ),
       ),
     ],

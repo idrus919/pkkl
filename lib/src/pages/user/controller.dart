@@ -23,11 +23,6 @@ class UserController extends GetxController {
     super.onInit();
   }
 
-  void start() async {
-    final result = await Get.toNamed(rankRoute);
-    if (result != null) Get.back(result: true);
-  }
-
   Future get() async {
     loading(true);
     await Repository.users(
@@ -58,5 +53,11 @@ class UserController extends GetxController {
   void onTapUser(UserModel? user) {
     input.value.user = user;
     input.refresh();
+  }
+
+  void start() async {
+    final result = await Get.toNamed(rankRoute, arguments: input.value);
+
+    if (result != null) Get.back(result: true);
   }
 }

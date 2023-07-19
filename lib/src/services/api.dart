@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
+import 'package:pkkl/src/constants/route.dart';
+import 'package:pkkl/src/services/index.dart';
 import 'package:pkkl/src/utils/dio/index.dart';
+import 'package:pkkl/src/utils/indext.dart';
 
 class Api {
   static DioClient dio = DioClient();
@@ -23,6 +28,16 @@ class Api {
 
       onSuccess(response.data);
     } catch (e) {
+      if (e.toString() == 'Unauthorized') {
+        final currentRoute = Get.currentRoute;
+        if (currentRoute != loginRoute) {
+          await Utils.removeToken();
+          await AppService.find.checkLogged();
+          Get.offAllNamed(loginRoute);
+        }
+        onError('');
+        return;
+      }
       onError(e.toString());
     }
   }
@@ -48,6 +63,18 @@ class Api {
 
       onSuccess(response.data);
     } catch (e) {
+      Object error = e;
+      final unauthError = error is UnauthorizedException;
+      if (unauthError) {
+        final currentRoute = Get.currentRoute;
+        if (currentRoute != loginRoute) {
+          await Utils.removeToken();
+          await AppService.find.checkLogged();
+          Get.offAllNamed(loginRoute);
+        }
+        onError('');
+        return;
+      }
       onError(e.toString());
     }
   }
@@ -74,6 +101,18 @@ class Api {
 
       onSuccess(response.data);
     } catch (e) {
+      Object error = e;
+      final unauthError = error is UnauthorizedException;
+      if (unauthError) {
+        final currentRoute = Get.currentRoute;
+        if (currentRoute != loginRoute) {
+          await Utils.removeToken();
+          await AppService.find.checkLogged();
+          Get.offAllNamed(loginRoute);
+        }
+        onError('');
+        return;
+      }
       onError(e.toString());
     }
   }
@@ -100,6 +139,18 @@ class Api {
 
       onSuccess(response.data);
     } catch (e) {
+      Object error = e;
+      final unauthError = error is UnauthorizedException;
+      if (unauthError) {
+        final currentRoute = Get.currentRoute;
+        if (currentRoute != loginRoute) {
+          await Utils.removeToken();
+          await AppService.find.checkLogged();
+          Get.offAllNamed(loginRoute);
+        }
+        onError('');
+        return;
+      }
       onError(e.toString());
     }
   }
@@ -126,6 +177,18 @@ class Api {
 
       onSuccess(response.data);
     } catch (e) {
+      Object error = e;
+      final unauthError = error is UnauthorizedException;
+      if (unauthError) {
+        final currentRoute = Get.currentRoute;
+        if (currentRoute != loginRoute) {
+          await Utils.removeToken();
+          await AppService.find.checkLogged();
+          Get.offAllNamed(loginRoute);
+        }
+        onError('');
+        return;
+      }
       onError(e.toString());
     }
   }
