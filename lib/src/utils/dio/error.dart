@@ -162,5 +162,5 @@ class UnknownException extends DioException {
       : super(requestOptions: r, response: response);
 
   @override
-  String toString() => 'Oops, tidak ada koneksi internet';
+  String toString() => response?.statusMessage ?? '';
 }

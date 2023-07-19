@@ -3,6 +3,7 @@ import 'package:pkkl/src/models/index.dart';
 import 'package:pkkl/src/models/question.dart';
 import 'package:pkkl/src/pages/input.dart';
 import 'package:pkkl/src/repository.dart';
+import 'package:pkkl/src/utils/popup/index.dart';
 
 class EvaluationController extends GetxController {
   static EvaluationController get find => Get.find();
@@ -33,16 +34,28 @@ class EvaluationController extends GetxController {
     loading(false);
   }
 
-  void answer(QuestionModel? question, Model? answer) {
+  void score(QuestionModel? question, Model? value) {
     final temps = input.value.questions ?? [];
     final temp = temps.firstWhere((e) => e?.id == question?.id);
 
     if (temp != null) {
-      temp.answer = answer;
+      temp.score = value;
       final i = temps.indexWhere((e) => e?.id == temp.id);
       temps[i] = temp;
       input.value.questions = temps;
       input.refresh();
     }
+  }
+
+  void submit() async {
+    Popup.loading();
+    await Repository.score(
+      input.value,
+      onSuccess: () {
+        Get.back();
+        Get.back(result: true);
+      },
+      onError: Get.back,
+    );
   }
 }

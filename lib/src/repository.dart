@@ -117,4 +117,24 @@ class Repository {
       },
     );
   }
+
+  static Future score(
+    EvolutionInput? input, {
+    required VoidCallback onSuccess,
+    required VoidCallback onError,
+  }) async {
+    const url = 'v1/evaluation/score';
+    try {
+      await Api.post(
+        url,
+        body: jsonEncode(input?.toJson),
+        onSuccess: (json) => onSuccess(),
+        onError: (error) => throw error,
+      );
+    } catch (e) {
+      onError();
+      Utils.snackbar(e.toString());
+      debugPrint(e.toString());
+    }
+  }
 }

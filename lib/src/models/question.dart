@@ -5,9 +5,9 @@ class QuestionModel {
   final int? id;
   final String? question;
   final SubIndicatorModel? subIndicator;
-  Model? answer;
+  Model? score;
 
-  QuestionModel({this.id, this.question, this.subIndicator, this.answer});
+  QuestionModel({this.id, this.question, this.subIndicator, this.score});
 
   static QuestionModel? fromJson(Map<String, dynamic>? json) {
     if (json == null) return null;
@@ -17,5 +17,9 @@ class QuestionModel {
       subIndicator: SubIndicatorModel.fromJson(json['sub_indicator']),
       question: json['question'],
     );
+  }
+
+  Map<String, dynamic> get toJson {
+    return {'question_id': id, 'score': score?.id};
   }
 }

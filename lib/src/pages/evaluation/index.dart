@@ -48,7 +48,7 @@ class EvaluationPage extends StatelessWidget {
           question: question,
           row: index + 1,
           onDetail: () {},
-          onAnswer: (answer) => controller.answer(question, answer),
+          onScore: (score) => controller.score(question, score),
         );
       },
       separatorBuilder: (context, index) => height(),
@@ -57,11 +57,12 @@ class EvaluationPage extends StatelessWidget {
   }
 
   Widget _buildButton(EvolutionInput? input) {
+    final controller = EvaluationController.find;
     final enable = input?.enableEvaluation ?? false;
     return Padding(
       padding: inset(12),
       child: ElevatedButton(
-        onPressed: enable ? () {} : null,
+        onPressed: enable ? controller.submit : null,
         child: const Center(child: Text('Simpan')),
       ),
     );

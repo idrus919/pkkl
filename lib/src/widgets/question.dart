@@ -5,25 +5,25 @@ import 'package:pkkl/src/constants/themes/colors.dart';
 import 'package:pkkl/src/constants/themes/dimens.dart';
 import 'package:pkkl/src/models/index.dart';
 import 'package:pkkl/src/models/question.dart';
-import 'package:pkkl/src/widgets/answer.dart';
+import 'package:pkkl/src/widgets/score.dart';
 import 'package:pkkl/src/widgets/inkwell.dart';
 
 class QuestionWidget extends StatelessWidget {
   final QuestionModel? question;
   final int row;
   final VoidCallback? onDetail;
-  final Function(Model answer) onAnswer;
+  final Function(Model score) onScore;
   const QuestionWidget({
     super.key,
     this.question,
     this.row = 1,
     this.onDetail,
-    required this.onAnswer,
+    required this.onScore,
   });
 
   @override
   Widget build(BuildContext context) {
-    final answer = question?.answer;
+    final score = question?.score;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -78,10 +78,10 @@ class QuestionWidget extends StatelessWidget {
                   spacing: 4,
                   runSpacing: 4,
                   children: scores.map((e) {
-                    return AnswerWidget(
-                      answer: e,
-                      active: answer?.id == e.id,
-                      onTap: () => onAnswer(e),
+                    return ScoreWidget(
+                      score: e,
+                      active: score?.id == e.id,
+                      onTap: () => onScore(e),
                     );
                   }).toList(),
                 ),

@@ -5,11 +5,11 @@ import 'package:pkkl/src/constants/themes/dimens.dart';
 import 'package:pkkl/src/models/index.dart';
 import 'package:pkkl/src/widgets/inkwell.dart';
 
-class AnswerWidget extends StatelessWidget {
-  final Model? answer;
+class ScoreWidget extends StatelessWidget {
+  final Model? score;
   final VoidCallback? onTap;
   final bool active;
-  const AnswerWidget({super.key, this.answer, this.onTap, this.active = false});
+  const ScoreWidget({super.key, this.score, this.onTap, this.active = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AnswerWidget extends StatelessWidget {
         radius: borderRadius(20),
         onTap: onTap,
         child: Text(
-          answer?.name ?? '',
+          score?.name ?? '',
           style: Get.textTheme.bodySmall?.copyWith(
             color: active ? neutral1Color : neutralColor,
             fontSize: 11,

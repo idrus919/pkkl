@@ -1,6 +1,7 @@
 import 'package:pkkl/src/models/index.dart';
 import 'package:pkkl/src/models/question.dart';
 import 'package:pkkl/src/models/user.dart';
+import 'package:pkkl/src/utils/date.dart';
 
 class EvolutionInput {
   DateTime? month;
@@ -20,11 +21,21 @@ class EvolutionInput {
 
   bool get enableEvaluation {
     final questions = this.questions ?? [];
-    final empty = questions.any((e) => e?.answer == null);
+    final empty = questions.any((e) => e?.score == null);
     return enableUser && questions.isNotEmpty && !empty;
   }
 
   String get paramUser {
     return '?year=${month?.year}&month=${month?.month}&urban_village_id=${urbanVillage?.id}';
+  }
+
+  Map<String, dynamic> get toJson {
+    final questions = this.questions ?? [];
+    final mapScore = questions.map((e) => e?.toJson).toList();
+    final month = DateUtil.string(
+      this.month,
+      format: 'yyyy-MM-dd',
+    );
+    return {'user_id': user?.id, 'date': month, 'scores': mapScore};
   }
 }

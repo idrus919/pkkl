@@ -7,4 +7,17 @@ class DateUtil {
     final result = DateFormat.MMMM().format(date);
     return result;
   }
+
+  static String string(
+    DateTime? date, {
+    String format = 'dd MMM yyyy',
+    bool zone = false,
+  }) {
+    if (date == null) return '';
+
+    final result = DateFormat(format, 'id_ID').format(date);
+    final zoneString = zone ? ' ${date.timeZoneName}' : '';
+
+    return result + zoneString;
+  }
 }

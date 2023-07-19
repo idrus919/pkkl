@@ -120,9 +120,10 @@ class LoginPage extends StatelessWidget {
               ),
               controller: controller.usernameController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
               inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
                 FilteringTextInputFormatter.deny(
                   RegExp(r'\s'),
                 ),

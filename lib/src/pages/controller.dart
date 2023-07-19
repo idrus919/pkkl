@@ -51,9 +51,12 @@ class MainController extends GetxController {
       month: month.value,
       urbanVillage: user.value?.urbanVillage,
     );
+
     final result = await Get.toNamed(userRoute, arguments: input);
 
-    if (result != null) month(null);
+    if (result != null) {
+      Utils.snackbar('Berhasil memberi penilaian');
+    }
   }
 
   void logout() async {
