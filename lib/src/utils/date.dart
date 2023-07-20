@@ -20,4 +20,11 @@ class DateUtil {
 
     return result + zoneString;
   }
+
+  static DateTime? parse(String? text) {
+    text = text ?? '';
+    if (text.isEmpty) return null;
+
+    return DateTime.parse(text).toLocal();
+  }
 }

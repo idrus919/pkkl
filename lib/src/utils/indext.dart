@@ -30,6 +30,10 @@ class Utils {
     return (data as List?) != null && (data as List).isNotEmpty;
   }
 
+  static int doubleToInt(double value) {
+    return value.round();
+  }
+
   static void snackbar(String? message) {
     message = message ?? '';
     if (message.isNotEmpty) {

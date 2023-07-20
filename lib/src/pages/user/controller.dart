@@ -56,7 +56,7 @@ class UserController extends GetxController {
   }
 
   void start() async {
-    final result = await Get.toNamed(rankRoute, arguments: input.value);
+    final result = await Get.toNamed(evaluationRoute, arguments: input.value);
 
     if (result != null) Get.back(result: true);
   }

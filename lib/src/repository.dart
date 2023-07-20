@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pkkl/src/models/auth.dart';
+import 'package:pkkl/src/models/evaluation.dart';
+import 'package:pkkl/src/models/indicator.dart';
 import 'package:pkkl/src/models/question.dart';
 import 'package:pkkl/src/models/user.dart';
 import 'package:pkkl/src/pages/input.dart';
@@ -136,5 +138,62 @@ class Repository {
       Utils.snackbar(e.toString());
       debugPrint(e.toString());
     }
+  }
+
+  static Future keplings({
+    required Function(List<UserModel?> values) onSuccess,
+  }) async {
+    const url = 'v1/evaluation/kepling';
+
+    await Api.get(
+      url,
+      onSuccess: (json) {
+        List<UserModel?> result = [];
+        if (Utils.isList(json['data'])) {
+          final data = json['data'] as List;
+          result = data.map((f) => UserModel.fromJson(f)).toList();
+        }
+
+        onSuccess(result);
+      },
+      onError: (error) {
+        Utils.snackbar(error);
+        debugPrint(error);
+      },
+    );
+  }
+
+  static Future scores(
+    int? id,
+    int? year, {
+    required Function(
+      List<EvaluationModel?> values,
+      List<IndicatorModel?> indicators,
+    ) onSuccess,
+  }) async {
+    final url = 'v1/evaluation/$id/$year/scores';
+
+    await Api.get(
+      url,
+      onSuccess: (json) {
+        List<EvaluationModel?> result = [];
+        if (Utils.isList(json['data'])) {
+          final data = json['data'] as List;
+          result = data.map((f) => EvaluationModel.fromJson(f)).toList();
+        }
+
+        List<IndicatorModel?> indicators = [];
+        if (Utils.isList(json['indicators'])) {
+          final data = json['indicators'] as List;
+          indicators = data.map((f) => IndicatorModel.fromJson(f)).toList();
+        }
+
+        onSuccess(result, indicators);
+      },
+      onError: (error) {
+        Utils.snackbar(error);
+        debugPrint(error);
+      },
+    );
   }
 }

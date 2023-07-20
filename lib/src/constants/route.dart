@@ -6,18 +6,22 @@ import 'package:pkkl/src/pages/login/controller.dart';
 import 'package:pkkl/src/pages/login/index.dart';
 import 'package:pkkl/src/pages/evaluation/controller.dart';
 import 'package:pkkl/src/pages/evaluation/index.dart';
+import 'package:pkkl/src/pages/score/controller.dart';
+import 'package:pkkl/src/pages/score/index.dart';
 import 'package:pkkl/src/pages/user/controller.dart';
 import 'package:pkkl/src/pages/user/index.dart';
 
 const index = '/';
 const login = '/login';
 const user = '/user';
-const rank = '/rank';
+const evaluation = '/evaluation';
+const score = '/score';
 
 const mainRoute = index;
 const loginRoute = login;
 const userRoute = user;
-const rankRoute = rank;
+const evaluationRoute = evaluation;
+const scoreRoute = score;
 
 final routes = [
   GetPage(
@@ -34,10 +38,17 @@ final routes = [
         ),
       ),
       GetPage(
-        name: rank,
+        name: evaluation,
         page: () => const EvaluationPage(),
         binding: BindingsBuilder(
           () => Get.put<EvaluationController>(EvaluationController()),
+        ),
+      ),
+      GetPage(
+        name: score,
+        page: () => const ScorePage(),
+        binding: BindingsBuilder(
+          () => Get.put<ScoreController>(ScoreController()),
         ),
       ),
     ],

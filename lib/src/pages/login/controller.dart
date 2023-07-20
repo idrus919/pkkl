@@ -59,7 +59,7 @@ class LoginController extends GetxController {
         onSuccess: (value) async {
           await Utils.setToken(value?.accessToken);
           await AppService.find.checkLogged();
-          Get.offAllNamed(mainRoute, arguments: value?.user);
+          Get.offAllNamed(mainRoute);
         },
       );
       loading.value = false;

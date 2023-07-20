@@ -14,24 +14,27 @@ class MainController extends GetxController {
 
   final loading = false.obs;
 
-  final argument = Get.arguments as UserModel?;
   final user = Rxn<UserModel?>();
   final month = Rxn<DateTime>();
+  final keplings = <UserModel?>[].obs;
 
   @override
   void onInit() {
-    user(argument);
-    if (argument == null) me();
+    get();
     super.onInit();
   }
 
-  Future me() async {
+  Future get() async {
     loading(true);
+    await Future.wait([me(), kepling()]);
+    loading(false);
+  }
+
+  Future me() async {
     await Repository.me(
       onSuccess: (value) => user(value),
       onError: () {},
     );
-    loading(false);
   }
 
   void monthPicker(BuildContext context) async {
@@ -65,9 +68,22 @@ class MainController extends GetxController {
       onSuccess: () async {
         await Utils.removeToken();
         await AppService.find.checkLogged();
-        Get.offAllNamed(mainRoute);
+        Get.offAllNamed(loginRoute);
       },
       onError: Get.back,
     );
+  }
+
+  Future kepling() async {
+    await Repository.keplings(
+      onSuccess: (values) {
+        keplings.value = values;
+        keplings.refresh();
+      },
+    );
+  }
+
+  void toScore(UserModel? user) {
+    Get.toNamed(scoreRoute, arguments: user);
   }
 }

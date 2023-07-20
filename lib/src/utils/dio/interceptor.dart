@@ -35,7 +35,7 @@ class AppInterceptors extends Interceptor {
       case DioExceptionType.cancel:
       case DioExceptionType.badCertificate:
       case DioExceptionType.unknown:
-        throw UnknownException(err.requestOptions, err.response);
     }
+    return handler.next(err);
   }
 }
