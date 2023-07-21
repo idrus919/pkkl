@@ -66,7 +66,6 @@ class ScorePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: e?.color ?? primaryColor,
-                          width: 0.5,
                         ),
                         shape: BoxShape.circle,
                       ),
