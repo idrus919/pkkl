@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class IndicatorModel {
-  int? id;
-  String? name;
-  Color? color;
+  final int? id;
+  final String? name;
+  final Color? color;
+  double? score;
 
-  IndicatorModel({this.id, this.name, this.color});
+  IndicatorModel({this.id, this.name, this.color, this.score});
 
   static IndicatorModel? fromJson(Map<dynamic, dynamic>? json) {
     if (json == null) return null;

@@ -1,8 +1,8 @@
-import 'package:pkkl/src/models/score.dart';
+import 'package:pkkl/src/models/indicator.dart';
 
 class TempModel {
   DateTime? date;
-  List<List<ScoreModel?>?>? scores;
+  List<IndicatorModel?>? indicators;
 
-  TempModel({this.date, this.scores});
+  TempModel({this.date, this.indicators});
 }
