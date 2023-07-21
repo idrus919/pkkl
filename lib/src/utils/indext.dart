@@ -55,4 +55,18 @@ class Utils {
       ));
     }
   }
+
+  static String rank(double num) {
+    if (num < 20) {
+      return 'Sangat Buruk';
+    } else if (num < 40) {
+      return 'Buruk';
+    } else if (num < 60) {
+      return 'Cukup';
+    } else if (num < 80) {
+      return 'Baik';
+    } else {
+      return 'Sangat Baik';
+    }
+  }
 }

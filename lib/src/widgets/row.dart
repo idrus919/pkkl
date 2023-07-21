@@ -5,7 +5,8 @@ import 'package:pkkl/src/constants/themes/dimens.dart';
 
 class RowWidget extends StatelessWidget {
   final String? title, value;
-  const RowWidget({super.key, this.title, this.value});
+  final Color? color;
+  const RowWidget({super.key, this.title, this.value, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +20,13 @@ class RowWidget extends StatelessWidget {
           Text(
             title ?? '',
             style: Get.textTheme.bodyMedium?.copyWith(
-              color: neutral3Color,
+              color: (color ?? neutral1Color).withOpacity(0.8),
             ),
           ),
           Text(
             value ?? '',
             style: Get.textTheme.bodyMedium?.copyWith(
-              color: neutral1Color,
+              color: color ?? neutral1Color,
               fontWeight: FontWeight.w500,
             ),
           ),

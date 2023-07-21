@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:pkkl/src/constants/themes/colors.dart';
 import 'package:pkkl/src/constants/themes/dimens.dart';
 import 'package:pkkl/src/models/chart.dart';
@@ -22,13 +23,13 @@ class ScoreController extends GetxController {
   final loading = false.obs;
   final evaluations = <EvaluationModel?>[].obs;
   final indicators = <IndicatorModel?>[].obs;
-  final year = DateTime.now().year.obs;
+  final year = DateTime.now().obs;
+  final month = Rxn<DateTime>();
   final charts = <ChartModel>[].obs;
 
   @override
   void onInit() {
     get();
-    grouping();
     super.onInit();
   }
 
@@ -36,7 +37,7 @@ class ScoreController extends GetxController {
     loading(true);
     await Repository.scores(
       argument?.id,
-      year.value,
+      year.value.year,
       onSuccess: (values, values2) {
         evaluations.value = values;
         evaluations.refresh();
@@ -44,13 +45,13 @@ class ScoreController extends GetxController {
         indicators.value = values2;
         indicators.refresh();
 
-        grouping();
+        summaryChart();
       },
     );
     loading(false);
   }
 
-  void grouping() {
+  void summaryChart() {
     charts.clear();
 
     var map = <DateTime?, List<Map<int?, double>>>{};
@@ -208,5 +209,91 @@ class ScoreController extends GetxController {
         ),
       ),
     );
+  }
+
+  void yearPicker(BuildContext context) {
+    final now = DateTime.now();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(child: Text('Pilih tahun')),
+          titlePadding: insetLTRB(16, 8, 16, 0),
+          contentPadding: inset(0),
+          content: SizedBox(
+            width: 300,
+            height: 300,
+            child: YearPicker(
+              firstDate: DateTime(now.year - 10, 1),
+              lastDate: DateTime(now.year, 1),
+              initialDate: year.value,
+              selectedDate: year.value,
+              currentDate: year.value,
+              onChanged: (DateTime dateTime) {
+                Navigator.pop(context);
+                year(dateTime);
+                evaluations.clear();
+                indicators.clear();
+                charts.clear();
+                month.value = null;
+                month.refresh();
+                get();
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void monthPicker(BuildContext context) async {
+    final now = DateTime.now();
+    DateTime last = DateTime(year.value.year, 12);
+    if (year.value.year == now.year) {
+      last = DateTime(year.value.year, now.month);
+    }
+
+    final result = await showMonthPicker(
+      context: context,
+      initialDate: month.value,
+      lastDate: last,
+      firstDate: DateTime(year.value.year, 1),
+    );
+
+    if (result != null) {
+      month.value = result;
+      month.refresh();
+    }
+  }
+
+  double summary() {
+    final list = evaluations.where((e) => e?.date == month.value).toList();
+
+    double result = 0;
+
+    for (var e in list) {
+      final map = <String, List<double>>{};
+      final scores = e?.scores ?? [];
+      var total = scores.fold<double>(0, (p, s) {
+        final score = double.parse(s?.score ?? '0');
+        return p + score;
+      });
+
+      final evaluator = e?.evaluator;
+      if (evaluator?.nip != null) {
+        final current = map['nip'] ?? [];
+        map['nip'] = [...current, total];
+      } else {
+        final current = map['nik'] ?? [];
+        map['nik'] = [...current, total];
+      }
+
+      final nip = (map['nip'] ?? []).fold<double>(0, (p, s) => p + s) * 0.6;
+      final nik = (map['nik'] ?? []).fold<double>(0, (p, s) => p + s) * 0.4;
+
+      result += nip + nik;
+    }
+
+    return result / list.length;
   }
 }
