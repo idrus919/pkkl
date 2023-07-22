@@ -47,6 +47,9 @@ class UserController extends GetxController {
     if (result != null) {
       input.value.month = result;
       input.refresh();
+      get();
+      users.clear();
+      users.refresh();
     }
   }
 

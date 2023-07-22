@@ -134,6 +134,7 @@ class MainPage extends StatelessWidget {
 
   Widget _buildProfile(UserModel? user) {
     final kepling = user?.nik != null;
+    final controller = MainController.find;
 
     return Container(
       margin: insetHorizontal(),
@@ -191,7 +192,7 @@ class MainPage extends StatelessWidget {
           VisibilityWidget(
             visible: kepling,
             child: InkWellWidget(
-              onTap: () {},
+              onTap: () => controller.toScore(controller.user.value),
               padding: insetLTRB(16, 8, 8, 8),
               radius: borderRadius(),
               child: Row(
