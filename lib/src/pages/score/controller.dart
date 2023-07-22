@@ -73,7 +73,9 @@ class ScoreController extends GetxController {
         temp[key] = total;
       });
       list.add(temp);
-      map[e?.date] = list;
+      final currents = map[e?.date] ?? [];
+      currents.addAll(list);
+      map[e?.date] = currents;
     }
 
     map.forEach((key, value) {
@@ -97,7 +99,7 @@ class ScoreController extends GetxController {
     });
   }
 
-  LineChartData mainData(List<IndicatorModel?> indicators) {
+  LineChartData data(List<IndicatorModel?> indicators) {
     return LineChartData(
       minY: 0,
       maxY: indicators.length.toDouble(),

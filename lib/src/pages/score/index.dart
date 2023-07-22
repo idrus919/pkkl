@@ -147,7 +147,7 @@ class ScorePage extends StatelessWidget {
             child: Padding(
               padding: inset(8),
               child: LineChart(
-                controller.mainData(indicators),
+                controller.data(indicators),
               ),
             ),
           ),
