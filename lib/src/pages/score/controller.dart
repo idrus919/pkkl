@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +9,7 @@ import 'package:pkkl/src/constants/themes/dimens.dart';
 import 'package:pkkl/src/models/chart.dart';
 import 'package:pkkl/src/models/evaluation.dart';
 import 'package:pkkl/src/models/indicator.dart';
+import 'package:pkkl/src/models/score.dart';
 import 'package:pkkl/src/models/user.dart';
 import 'package:pkkl/src/repository.dart';
 import 'package:pkkl/src/utils/date.dart';
@@ -44,59 +44,36 @@ class ScoreController extends GetxController {
 
         indicators.value = values2;
         indicators.refresh();
-
-        summaryChart();
       },
     );
     loading(false);
   }
 
-  void summaryChart() {
-    charts.clear();
+  List<FlSpot> spots(IndicatorModel? indicator) {
+    List<FlSpot> list = [];
+    var map = <DateTime?, List<ScoreModel?>>{};
 
-    var map = <DateTime?, List<Map<int?, double>>>{};
-
-    for (var e in evaluations.value) {
+    for (var e in evaluations) {
       final scores = e?.scores ?? [];
-      final groupScores = groupBy(scores, (e) {
-        return e?.question?.subIndicator?.indicator?.id;
-      });
-
-      List<Map<int?, double>> list = [];
-      final temp = <int?, double>{};
-      groupScores.forEach((key, value) {
-        var total = value.fold<double>(0, (p, e) {
-          final score = double.parse(e?.score ?? '0');
-          return p + score;
-        });
-        total = total / value.length;
-        temp[key] = total;
-      });
-      list.add(temp);
+      final ss = scores.where((e) {
+        final id = e?.question?.subIndicator?.indicator?.id;
+        return id == indicator?.id;
+      }).toList();
       final currents = map[e?.date] ?? [];
-      currents.addAll(list);
+      currents.addAll(ss);
       map[e?.date] = currents;
     }
 
     map.forEach((key, value) {
-      var temp = <int?, List<double>>{};
-      for (var e in value) {
-        e.forEach((key, value) {
-          final current = temp[key] ?? [];
-          temp[key] = [...current, value];
-        });
-      }
-
-      var data = <int?, double>{};
-      temp.forEach((key2, value2) {
-        final total = value2.fold<double>(0, (p, e) => p + e) / value2.length;
-        data[key2] = total;
+      final total = value.fold<double>(0, (p, e) {
+        final score = double.parse(e?.score ?? '0');
+        return p + score;
       });
-
-      final chart = ChartModel(date: key, data: data);
-      charts.value.add(chart);
-      charts.refresh();
+      final month = (key?.month ?? 0).toDouble();
+      list.add(FlSpot(month, total / value.length));
     });
+
+    return list;
   }
 
   LineChartData data(List<IndicatorModel?> indicators) {
@@ -164,12 +141,7 @@ class ScoreController extends GetxController {
       borderData: FlBorderData(show: false),
       lineBarsData: indicators.map((e) {
         return LineChartBarData(
-          spots: charts.value.map((e2) {
-            final month = (e2.date?.month ?? 0).toDouble();
-            final data = e2.data ?? {};
-            final score = data[e?.id] ?? 0;
-            return FlSpot(month, score);
-          }).toList(),
+          spots: spots(e).toList(),
           isCurved: false,
           color: e?.color,
           barWidth: 1,
