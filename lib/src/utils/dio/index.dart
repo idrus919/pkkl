@@ -8,7 +8,7 @@ class DioClient {
   Future<Dio> get request async {
     final token = await Utils.getToken();
     var dio = Dio(BaseOptions(
-      baseUrl: 'https://alhubb919.cloud/',
+      baseUrl: 'https://kinerjakeplinghelvetia.com/',
       responseType: ResponseType.json,
       contentType: ContentType.json.toString(),
       headers: {'Authorization': token},
