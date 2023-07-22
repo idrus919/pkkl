@@ -87,8 +87,9 @@ class ScoreController extends GetxController {
         drawVerticalLine: false,
         getDrawingHorizontalLine: (value) {
           return const FlLine(
-            color: neutral2Color,
+            color: neutral5Color,
             strokeWidth: 1,
+            dashArray: [4],
           );
         },
       ),
