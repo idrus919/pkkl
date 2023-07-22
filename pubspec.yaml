@@ -21,6 +21,8 @@ dependencies:
   dio: ^5.2.1+1
   collection: ^1.17.1
   fl_chart: ^0.63.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.1
 
 dev_dependencies:
   flutter_test:
@@ -56,3 +58,11 @@ flutter:
           weight: 800
         - asset: assets/fonts/Poppins-900.ttf
           weight: 900
+
+flutter_icons:
+  android: true
+  image_path_android: assets/images/medan.png
+
+flutter_native_splash:
+  color: '#FFFFFF'
+  image: assets/images/medan.png
