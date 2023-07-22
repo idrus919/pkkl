@@ -55,12 +55,12 @@ class ScoreController extends GetxController {
 
     for (var e in evaluations) {
       final scores = e?.scores ?? [];
-      final ss = scores.where((e) {
+      final total = scores.where((e) {
         final id = e?.question?.subIndicator?.indicator?.id;
         return id == indicator?.id;
       }).toList();
       final currents = map[e?.date] ?? [];
-      currents.addAll(ss);
+      currents.addAll(total);
       map[e?.date] = currents;
     }
 
