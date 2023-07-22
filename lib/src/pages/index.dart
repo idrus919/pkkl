@@ -236,7 +236,8 @@ class MainPage extends StatelessWidget {
         height(8),
         ListView.separated(
           shrinkWrap: true,
-          padding: insetHorizontal(),
+          padding: insetLTRB(16, 0, 16, 16),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             final kepling = keplings[index];
 
