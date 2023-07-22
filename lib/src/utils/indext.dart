@@ -56,7 +56,9 @@ class Utils {
     }
   }
 
-  static String rank(double num) {
+  static String rank(double? num) {
+    if (num == null) return '-';
+
     if (num < 20) {
       return 'Sangat Buruk';
     } else if (num < 40) {

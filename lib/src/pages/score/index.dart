@@ -175,7 +175,7 @@ class ScorePage extends StatelessWidget {
                   child: VisibilityWidget(
                     visible: month != null,
                     replacement: Text(
-                      'Belum pilih bulan',
+                      'Bulan',
                       style: Get.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
@@ -214,8 +214,6 @@ class ScorePage extends StatelessWidget {
           ),
           Builder(
             builder: (context) {
-              if (month == null) return const SizedBox();
-
               final summary = controller.summary();
 
               return Container(
@@ -229,7 +227,7 @@ class ScorePage extends StatelessWidget {
                   children: [
                     RowWidget(
                       title: 'Hasil Penilaian Kinerja',
-                      value: summary.toStringAsFixed(1),
+                      value: summary?.toStringAsFixed(1) ?? '-',
                       color: neutralColor,
                     ),
                     RowWidget(

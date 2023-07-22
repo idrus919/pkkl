@@ -266,8 +266,10 @@ class ScoreController extends GetxController {
     }
   }
 
-  double summary() {
+  double? summary() {
     final list = evaluations.where((e) => e?.date == month.value).toList();
+
+    if (list.isEmpty) return null;
 
     double result = 0;
 
