@@ -79,7 +79,7 @@ class ScoreController extends GetxController {
   LineChartData data(List<IndicatorModel?> indicators) {
     return LineChartData(
       minY: 0,
-      maxY: indicators.length.toDouble(),
+      maxY: 5,
       maxX: 12,
       minX: 1,
       gridData: FlGridData(
