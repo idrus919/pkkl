@@ -61,7 +61,7 @@ class QuestionWidget extends StatelessWidget {
                     ),
                     width(4),
                     InkWellWidget(
-                      onTap: () {},
+                      onTap: onDetail,
                       radius: borderRadius(20),
                       child: const Icon(
                         Icons.info_outline_rounded,

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pkkl/src/models/index.dart';
 import 'package:pkkl/src/models/question.dart';
+import 'package:pkkl/src/pages/evaluation/popup.dart';
 import 'package:pkkl/src/pages/input.dart';
 import 'package:pkkl/src/repository.dart';
 import 'package:pkkl/src/utils/popup/index.dart';
@@ -56,6 +57,15 @@ class EvaluationController extends GetxController {
         Get.back(result: true);
       },
       onError: Get.back,
+    );
+  }
+
+  void info(int row, QuestionModel? question) {
+    Get.bottomSheet(
+      InformationPopup(row: row, question: question),
+      isScrollControlled: true,
+      useRootNavigator: true,
+      ignoreSafeArea: false,
     );
   }
 }

@@ -154,13 +154,16 @@ class MainPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      user?.name ?? '',
-                      style: Get.textTheme.bodyLarge?.copyWith(
-                        color: neutral1Color,
-                        fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Text(
+                        user?.name ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Get.textTheme.bodyLarge?.copyWith(
+                          color: neutral1Color,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                     const Icon(

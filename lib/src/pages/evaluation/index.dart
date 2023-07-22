@@ -44,10 +44,11 @@ class EvaluationPage extends StatelessWidget {
       padding: inset(12),
       itemBuilder: (context, index) {
         final question = list[index];
+        final row = index + 1;
         return QuestionWidget(
           question: question,
-          row: index + 1,
-          onDetail: () {},
+          row: row,
+          onDetail: () => controller.info(row, question),
           onScore: (score) => controller.score(question, score),
         );
       },
